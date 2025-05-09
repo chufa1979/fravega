@@ -1,0 +1,31 @@
+
+# Node modules
+/node_modules/
+
+# React Native Bundler cache
+/metro-cache/
+/babel-cache/
+
+# Android
+/android/.gradle/
+/android/app/build/
+/android/build/
+
+# iOS
+/ios/Pods/
+/ios/build/
+/ios/.generated/
+
+# Expo
+.expo/
+/.expo-shared/
+
+# macOS
+.DS_Store
+
+# Log files
+*.log
+
+# npm package-lock and yarn lock files
+package-lock.json
+yarn.lock

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, Image, ActivityIndicator } from 'react-native';
+import { View, FlatList, Image, ActivityIndicator, SafeAreaView } from 'react-native';
 import { Appbar, Searchbar, Card, BottomNavigation } from 'react-native-paper';
 import styles from './styles';
 
@@ -60,25 +60,21 @@ function HomeScreen() {
           data={users}
           keyExtractor={(item) => item.id.toString()}
           renderItem={renderUser}
+          contentContainerStyle={styles.flatListContent}
         />
       )}
     </View>
   );
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Appbar.Header>
-        <Appbar.Content title="Usuarios de GitHub" />
+        <Appbar.Content title="Fravega Tech" />
       </Appbar.Header>
 
       {renderContent()}
 
-      <BottomNavigation
-        navigationState={{ index, routes }}
-        onIndexChange={setIndex}
-        renderScene={() => null}
-      />
-    </View>
+    </SafeAreaView>
   );
 }
 

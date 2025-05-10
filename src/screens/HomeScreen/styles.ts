@@ -16,6 +16,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 8,
   },
+  flatListContent: {
+    flexGrow: 1,  // Esto asegura que el FlatList ocupe el espacio restante.
+  },
 });
 
 export default styles;

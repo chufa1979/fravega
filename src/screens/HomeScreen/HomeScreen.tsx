@@ -13,7 +13,7 @@ function HomeScreen() {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const data = await fetchUsers(); // ✅ Usá la función del servicio
+        const data = await fetchUsers(); 
         setUsers(data);
       } catch (error) {
         // Podés manejar el error acá si querés mostrar algo en UI

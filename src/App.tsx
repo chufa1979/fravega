@@ -1,13 +1,7 @@
 import React from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
-import HomeScreen from './screens/HomeScreen';
+import AppNavigator from './navigations/AppNavigator';
 
-function App(): React.JSX.Element {
-  return (
-    <PaperProvider>
-      <HomeScreen />
-    </PaperProvider>
-  );
+export default function App() {
+  return <AppNavigator />;
 }
-
-export default App;

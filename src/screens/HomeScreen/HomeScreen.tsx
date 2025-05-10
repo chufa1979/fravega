@@ -1,38 +1,32 @@
+// src/screens/HomeScreen/HomeScreen.tsx
 import React, { useState, useEffect } from 'react';
 import { View, FlatList, Image, ActivityIndicator, SafeAreaView } from 'react-native';
-import { Appbar, Searchbar, Card, BottomNavigation } from 'react-native-paper';
+import { Appbar, Searchbar, Card } from 'react-native-paper';
 import styles from './styles';
+import { fetchUsers } from '../../services/userService';
 
 function HomeScreen() {
   const [searchQuery, setSearchQuery] = useState('');
   const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [index, setIndex] = useState(0);
-  const [routes] = useState([
-    { key: 'home', title: 'Inicio', icon: 'home' },
-    { key: 'favorites', title: 'Favoritos', icon: 'heart' },
-    { key: 'settings', title: 'Ajustes', icon: 'cog' },
-  ]);
 
   useEffect(() => {
-    fetchUsers();
-  }, []);
+    const getUsers = async () => {
+      try {
+        const data = await fetchUsers(); // ✅ Usá la función del servicio
+        setUsers(data);
+      } catch (error) {
+        // Podés manejar el error acá si querés mostrar algo en UI
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const fetchUsers = async () => {
-    try {
-      const response = await fetch('https://api.github.com/users');
-      const data = await response.json();
-      setUsers(data);
-    } catch (error) {
-      console.error('Error al obtener usuarios:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    getUsers();
+  }, []);
 
   const handleSearchChange = (query: string) => {
     setSearchQuery(query);
-    // Acá más adelante podés usar la API de búsqueda
   };
 
   const renderUser = ({ item }: any) => (
@@ -73,7 +67,6 @@ function HomeScreen() {
       </Appbar.Header>
 
       {renderContent()}
-
     </SafeAreaView>
   );
 }

@@ -15,6 +15,7 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [favorites, setFavorites] = useState<string[]>([]);
 
   const toggleFavorite = (username: string) => {
+    console.log('Toggling favorite for:', username);
     setFavorites((prev) =>
       prev.includes(username)
         ? prev.filter((u) => u !== username)

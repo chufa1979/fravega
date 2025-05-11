@@ -58,4 +58,8 @@ export default StyleSheet.create({
     color: '#1976D2',
     fontSize: 16,
   },
+  scrollContent: {
+  padding: 20,
+  alignItems: 'center',
+},
 });

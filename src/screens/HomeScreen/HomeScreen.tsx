@@ -1,6 +1,6 @@
 // src/screens/HomeScreen/HomeScreen.tsx
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, Image, ActivityIndicator, SafeAreaView } from 'react-native';
+import { View, FlatList, Image, ActivityIndicator, SafeAreaView, Text } from 'react-native';
 import { Appbar, Searchbar, Card } from 'react-native-paper';
 import styles from './styles';
 import { fetchUsers } from '../../services/userService';
@@ -59,14 +59,6 @@ function HomeScreen() {
           left={() => (
             <Image source={{ uri: item.avatar_url }} style={styles.avatar} />
           )}
-          right={() => (
-            <Icon 
-              name={isFavorite ? 'star' : 'star-outline'} // Define el nombre del icono
-              size={24} // Tamaño del icono
-              color={isFavorite ? '#FFD700' : '#000'} // Color dinámico
-            />
-          )}
-          onPress={() => handlePressUser(item.login)} 
         />
       </Card>
     );

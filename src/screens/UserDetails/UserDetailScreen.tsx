@@ -60,9 +60,6 @@ export default function UserDetailScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Appbar.Header>
-        <Appbar.Content title="Fravega Tech" />
-      </Appbar.Header>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Image source={{ uri: user.avatar_url }} style={styles.avatar} />
         <Text style={styles.name}>{user.name || user.login}</Text>

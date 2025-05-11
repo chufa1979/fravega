@@ -78,7 +78,7 @@ export default function UserDetailScreen() {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.button, isFavorite ? styles.buttonRemove : styles.buttonAdd]}
+          style={[styles.button, styles.buttonAdd]}
           onPress={() => navigation.goBack()}
         >
           <Text style={styles.buttonText}>

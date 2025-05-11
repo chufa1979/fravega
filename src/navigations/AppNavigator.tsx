@@ -3,7 +3,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
-import UserDetailScreen from '../screens/UserDetailScreen/UserDetailScreen';
+import UserDetailScreen from '../screens/UserDetails/UserDetailScreen';
 
 export type RootStackParamList = {
   Home: undefined;

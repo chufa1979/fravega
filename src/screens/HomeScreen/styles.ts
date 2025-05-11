@@ -19,6 +19,15 @@ const styles = StyleSheet.create({
   flatListContent: {
     flexGrow: 1,  // Esto asegura que el FlatList ocupe el espacio restante.
   },
+  cardContent: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  padding: 12,
+  },
+  username: {
+    fontSize: 16,
+    fontWeight: '500',
+  },
 });
 
 export default styles;

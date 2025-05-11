@@ -28,6 +28,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
   },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+  },
+  favoriteButton: {
+    marginRight: 10,  // Añadir un margen a la derecha
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  favoriteText: {
+    fontSize: 24,
+  },
 });
 
 export default styles;

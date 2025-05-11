@@ -1,6 +1,6 @@
 // src/screens/HomeScreen/HomeScreen.tsx
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, Image, ActivityIndicator, SafeAreaView, Text } from 'react-native';
+import { View, FlatList, Image, ActivityIndicator, SafeAreaView, Text, TouchableOpacity } from 'react-native';
 import { Appbar, Searchbar, Card } from 'react-native-paper';
 import styles from './styles';
 import { fetchUsers } from '../../services/userService';
@@ -9,10 +9,6 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigations/AppNavigator';
 import { FavoritesContext } from '../../context/FavoritesContext';
 import { useContext } from 'react';
-import { IconButton } from 'react-native-paper'; // para el ícono
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
-//import Icon from 'react-native-vector-icons/MaterialIcons';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'UserDetail'>;
 
@@ -48,16 +44,23 @@ function HomeScreen() {
     navigation.navigate('UserDetail', { username });
   };
 
+
   const renderUser = ({ item }: any) => {
     const isFavorite = favorites.includes(item.login);
-
+    
     return (
-      <Card style={styles.card}
-      onPress={() => handlePressUser(item.login)}>
+      <Card style={styles.card} onPress={() => handlePressUser(item.login)}>
         <Card.Title
           title={item.login}
           left={() => (
             <Image source={{ uri: item.avatar_url }} style={styles.avatar} />
+          )}
+          right={() => (
+            <TouchableOpacity onPress={() => toggleFavorite(item.login)} style={styles.favoriteButton}>
+              <Text style={styles.favoriteText}>
+                {isFavorite ? '❤️' : '🤍'}
+              </Text>
+            </TouchableOpacity>
           )}
         />
       </Card>

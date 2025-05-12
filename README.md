@@ -88,10 +88,10 @@ https://youtube.com/shorts/Xy0S0lD5PLY?feature=share
 ![Home Screen](./assets/screenshots/screen_01.png)
 
 ### 🔹 SpashScreen
-![Spash Screen](./assets/screenshots/screen_01.png)
+![Spash Screen](./assets/screenshots/screen_02.png)
 
 ### 🔹 Listado del Usuario
-![User List Screen](./assets/screenshots/screen_02.png)
+![User List Screen](./assets/screenshots/screen_03.png)
 
 ### 🔹 Lista con Usuario Favorito
 ![List Favorite User](./assets/screenshots/screen_04.png)

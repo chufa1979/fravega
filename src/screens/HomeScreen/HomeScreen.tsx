@@ -66,8 +66,12 @@ function HomeScreen() {
       </Card>
     );
   };
-//style={styles.card} onPress={() => handlePressUser(item.login)}
-  const renderContent = () => (
+const renderContent = () => {
+  const filteredUsers = users.filter((user) =>
+    user.login.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  return (
     <View style={styles.content}>
       <Searchbar
         placeholder="Buscar usuarios"
@@ -78,7 +82,7 @@ function HomeScreen() {
         <ActivityIndicator style={{ marginTop: 20 }} />
       ) : (
         <FlatList
-          data={users}
+          data={filteredUsers}
           keyExtractor={(item) => item.id.toString()}
           renderItem={renderUser}
           contentContainerStyle={styles.flatListContent}
@@ -86,6 +90,7 @@ function HomeScreen() {
       )}
     </View>
   );
+};
 
   return (
     <SafeAreaView style={styles.container}>

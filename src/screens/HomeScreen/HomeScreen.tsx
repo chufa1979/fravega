@@ -1,0 +1,105 @@
+// src/screens/HomeScreen/HomeScreen.tsx
+import React, { useState, useEffect } from 'react';
+import { View, FlatList, Image, ActivityIndicator, SafeAreaView, Text, TouchableOpacity } from 'react-native';
+import { Appbar, Searchbar, Card } from 'react-native-paper';
+import styles from './styles';
+import { fetchUsers } from '../../services/userService';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigations/AppNavigator';
+import { FavoritesContext } from '../../context/FavoritesContext';
+import { useContext } from 'react';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'UserDetail'>;
+
+function HomeScreen() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [users, setUsers] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { favorites, toggleFavorite } = useContext(FavoritesContext);
+
+  const navigation = useNavigation<NavigationProp>();
+
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const data = await fetchUsers();
+        setUsers(data);
+      } catch (error) {
+        console.error('Error al obtener usuarios:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getUsers();
+  }, []);
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    // Podés implementar búsqueda más adelante
+  };
+
+  const handlePressUser = (username: string) => {
+    navigation.navigate('UserDetail', { username });
+  };
+
+
+  const renderUser = ({ item }: any) => {
+    const isFavorite = favorites.includes(item.login);
+    
+    return (
+      <Card style={styles.card} onPress={() => handlePressUser(item.login)}>
+        <Card.Title
+          title={item.login}
+          left={() => (
+            <Image source={{ uri: item.avatar_url }} style={styles.avatar} />
+          )}
+          right={() => (
+            <TouchableOpacity onPress={() => toggleFavorite(item.login)} style={styles.favoriteButton}>
+              <Text style={styles.favoriteText}>
+                {isFavorite ? '❤️' : '🤍'}
+              </Text>
+            </TouchableOpacity>
+          )}
+        />
+      </Card>
+    );
+  };
+const renderContent = () => {
+  const filteredUsers = users.filter((user) =>
+    user.login.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  return (
+    <View style={styles.content}>
+      <Searchbar
+        placeholder="Buscar usuarios"
+        onChangeText={handleSearchChange}
+        value={searchQuery}
+      />
+      {loading ? (
+        <ActivityIndicator style={{ marginTop: 20 }} />
+      ) : (
+        <FlatList
+          data={filteredUsers}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderUser}
+          contentContainerStyle={styles.flatListContent}
+        />
+      )}
+    </View>
+  );
+};
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <Appbar.Header>
+        <Appbar.Content title="Fravega Tech" />
+      </Appbar.Header>
+      {renderContent()}
+    </SafeAreaView>
+  );
+}
+
+export default HomeScreen;
